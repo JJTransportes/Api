@@ -1,4 +1,8 @@
 using Api.Config;
+using Api.Data;
+using Api.Endpoints.Admins;
+using Api.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,11 @@ builder.WebHost.UseUrls($"http://*:{appConfig.Port}");
 
 builder.Services.AddOpenApi();
 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(appConfig.ConnectionString));
+
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -21,6 +30,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapAdminEndpoints();
 
 app.MapGet("health", () => new
 {
