@@ -1,6 +1,7 @@
 using Api.Config;
 using Api.Data;
 using Api.Endpoints.Admins;
+using Api.Endpoints.Drivers;
 using Api.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(appConfig.ConnectionString));
 
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<IDriverRepository, DriverRepository>();
 
 var app = builder.Build();
 
@@ -32,6 +34,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapAdminEndpoints();
+app.MapDriverEndpoints();
 
 app.MapGet("health", () => new
 {
