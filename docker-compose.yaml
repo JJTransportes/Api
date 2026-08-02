@@ -4,11 +4,13 @@ services:
     image: postgres:16
     environment:
       - POSTGRES_USER=jrdev
-      - POSTGRES_DB=pepi
+      - POSTGRES_DB=api_db
       - POSTGRES_PASSWORD=mypass123456
     ports:
       - 5433:5432
-    
+    networks:
+      - local-network
+
   api:
     container_name: api
     build:
@@ -22,7 +24,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
 
       AppConfig__Port: 5200
-      AppConfig__Service: api
+      AppConfig__Service: Api
       AppConfig__Status: Running
     networks:
       - local-network
