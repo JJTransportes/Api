@@ -1,5 +1,6 @@
 using System.Reflection;
 using Api.Models.Admins;
+using Api.Models.Customers;
 using Api.Models.Drivers;
 using Api.Models.Info;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ public class AppDbContext : DbContext
 
     public DbSet<Admin> Admins => Set<Admin>();
     public DbSet<Driver> Drivers => Set<Driver>();
+    public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<PhoneNumber> PhoneNumbers => Set<PhoneNumber>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
