@@ -130,7 +130,11 @@ public class DriverRepository : IDriverRepository
             .Where(p => p.UserId == id && p.UserType == Enums.UserType.Driver)
             .ToListAsync(cancellationToken);
 
+        var address = await _db.Addresses
+            .FirstOrDefaultAsync(a => a.UserId == id && a.UserType == Enums.UserType.Driver, cancellationToken);
+
         _db.PhoneNumbers.RemoveRange(phones);
+        if (address is not null) _db.Addresses.Remove(address);
         _db.Drivers.Remove(driver);
 
         await _db.SaveChangesAsync(cancellationToken);

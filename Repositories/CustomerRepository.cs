@@ -130,7 +130,11 @@ public class CustomerRepository : ICustomerRepository
             .Where(p => p.UserId == id && p.UserType == Enums.UserType.Customer)
             .ToListAsync(cancellationToken);
 
+        var address = await _db.Addresses
+            .FirstOrDefaultAsync(a => a.UserId == id && a.UserType == Enums.UserType.Customer, cancellationToken);
+
         _db.PhoneNumbers.RemoveRange(phones);
+        if (address is not null) _db.Addresses.Remove(address);
         _db.Customers.Remove(customer);
 
         await _db.SaveChangesAsync(cancellationToken);

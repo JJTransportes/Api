@@ -15,6 +15,7 @@ public class AppDbContext : DbContext
     public DbSet<Driver> Drivers => Set<Driver>();
     public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<PhoneNumber> PhoneNumbers => Set<PhoneNumber>();
+    public DbSet<Address> Addresses => Set<Address>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

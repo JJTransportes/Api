@@ -2,7 +2,9 @@ using Api.Config;
 using Api.Data;
 using Api.Endpoints.Admins;
 using Api.Endpoints.Customers;
+using Api.Endpoints.Customers.Addresses;
 using Api.Endpoints.Drivers;
+using Api.Endpoints.Drivers.Addresses;
 using Api.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +27,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IDriverRepository, DriverRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 
 var app = builder.Build();
 
@@ -37,7 +40,9 @@ app.UseHttpsRedirection();
 
 app.MapAdminEndpoints();
 app.MapDriverEndpoints();
+app.MapDriverAddressEndpoints();
 app.MapCustomerEndpoints();
+app.MapCustomerAddressEndpoints();
 
 app.MapGet("health", () => new
 {

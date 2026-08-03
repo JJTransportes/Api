@@ -15,4 +15,5 @@ public class Customer
     public string Gender { get; set; } = string.Empty;
     public bool Approved { get; set; } = false;
     public ICollection<PhoneNumber> Phones { get; set; } = new List<PhoneNumber>();
+    public Address? Address { get; set; }
 }
