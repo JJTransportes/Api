@@ -46,7 +46,7 @@ public class AdminRepository : IAdminRepository
     {
         var admin = new Admin
         {
-            Id = Guid.NewGuid(),
+            Id = dto.UserId,
             FullName = dto.FullName,
             Cpf = dto.Cpf,
             Email = dto.Email,

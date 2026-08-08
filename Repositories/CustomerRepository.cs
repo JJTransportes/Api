@@ -46,7 +46,7 @@ public class CustomerRepository : ICustomerRepository
     {
         var customer = new Customer
         {
-            Id = Guid.NewGuid(),
+            Id = dto.UserId,
             FullName = dto.FullName,
             Cpf = dto.Cpf,
             Email = dto.Email,

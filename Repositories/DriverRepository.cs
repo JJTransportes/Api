@@ -46,7 +46,7 @@ public class DriverRepository : IDriverRepository
     {
         var driver = new Driver
         {
-            Id = Guid.NewGuid(),
+            Id = dto.UserId,
             FullName = dto.FullName,
             Cpf = dto.Cpf,
             Email = dto.Email,
