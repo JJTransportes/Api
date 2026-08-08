@@ -8,5 +8,6 @@ public class AppConfig
   public string Service { get; init; } = string.Empty;
   public string Status { get; init; } = string.Empty;
   public string ConnectionString { get; init; } = string.Empty;
+  public int SubscriptionPrice { get; init; }
   public TimeOnly Time { get; init; } = TimeOnly.FromDateTime(DateTime.UtcNow);
 }

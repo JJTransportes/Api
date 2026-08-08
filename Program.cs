@@ -5,8 +5,10 @@ using Api.Endpoints.Customers;
 using Api.Endpoints.Customers.Addresses;
 using Api.Endpoints.Drivers;
 using Api.Endpoints.Drivers.Addresses;
+using Api.Endpoints.Subscriptions;
 using Api.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,9 @@ builder.WebHost.UseUrls($"http://*:{appConfig.Port}");
 
 builder.Services.AddOpenApi();
 
+builder.Services.ConfigureHttpJsonOptions(options =>
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(appConfig.ConnectionString));
 
@@ -28,6 +33,7 @@ builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IDriverRepository, DriverRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
 
 var app = builder.Build();
 
@@ -43,6 +49,7 @@ app.MapDriverEndpoints();
 app.MapDriverAddressEndpoints();
 app.MapCustomerEndpoints();
 app.MapCustomerAddressEndpoints();
+app.MapSubscriptionEndpoints();
 
 app.MapGet("health", () => new
 {

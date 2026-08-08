@@ -3,6 +3,7 @@ using Api.Models.Admins;
 using Api.Models.Customers;
 using Api.Models.Drivers;
 using Api.Models.Info;
+using Api.Models.Subscriptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Data;
@@ -16,6 +17,7 @@ public class AppDbContext : DbContext
     public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<PhoneNumber> PhoneNumbers => Set<PhoneNumber>();
     public DbSet<Address> Addresses => Set<Address>();
+    public DbSet<Subscription> Subscriptions => Set<Subscription>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

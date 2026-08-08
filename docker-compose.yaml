@@ -27,6 +27,7 @@ services:
       AppConfig__Service: Api
       AppConfig__Status: Running
       AppConfig__ConnectionString: "Host=api-db;Port=5432;Database=api_db;Username=jrdev;Password=mypass123456"
+      AppConfig__SubscriptionPrice: 990
     networks:
       - local-network
 
